@@ -3,6 +3,26 @@ from django.contrib import admin,messages
 
 from test_app.models import Book, Task, SubTask, Category, Post, UserProfile
 
+class UserProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        "nickname",
+        "age",
+        "followers_count",
+        "posts_count",
+        "post_comments",
+        "engagement_rate",
+    )
+    list_filter = (
+        "age",
+        "posts_count",
+        "post_comments",
+        "engagement_rate",
+    )
+    search_fields = (
+        "nickname",
+        "age",
+    )
+
 """Задание 1: Добавить настройку инлайн форм для админ класса задач. 
 При создании задачи должна появиться возможность создавать сразу и подзадачу."""
 
@@ -61,6 +81,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 admin.site.register(Book)
 admin.site.register(Post)
-admin.site.register(UserProfile)
+admin.site.register(UserProfile, UserProfileAdmin)
 
 
